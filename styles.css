@@ -6,22 +6,32 @@
      display: flex;
      flex-direction: column;
      justify-content: center;
+     align-items: center;
+ }
 
+ .control-group {
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
  }
 
  .item {
      flex: none;
  }
 
+ :root {
+     color-scheme: light dark;
+ }
+
  body {
      padding: 10px;
+     
+     color: light-dark(#292524, #BCBDD0);
+     background-color: light-dark(#fcfcfc, #161923);
  }
 
  input,
  select {
      margin: 5px;
- }
-
- button {
-     margin-top: 10px;
+     color: light-dark(#597700,#FFCA57);
  }
