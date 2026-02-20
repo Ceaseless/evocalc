@@ -38,11 +38,12 @@ function getPointsAt(globalIndex, tierPoints) {
 function displayCosts(totalPoints) {
     const bcDiscountFactor = parseFloat(document.getElementById("bcDiscount").value);
 
-    dpg_total = Math.ceil(totalPoints / dpgPointValue);
-    batch_total = Math.ceil(dpg_total / dpgBatchSize);
-    rdp_cost = batch_total * rdpPricePerBatch;
-    bc_cost_base = batch_total * bcPricePerBatch;
-    bc_cost_discount = bc_cost_base * (1 - bcDiscountFactor);
+    const dpg_total = Math.ceil(totalPoints / dpgPointValue);
+    const batch_total = Math.ceil(dpg_total / dpgBatchSize);
+    const rdp_cost = batch_total * rdpPricePerBatch;
+    const bc_cost_base = batch_total * bcPricePerBatch;
+    const bc_cost_discount = bc_cost_base * (1 - bcDiscountFactor);
+    const result = document.getElementById("result");
     result.innerText = "Points needed: " + totalPoints;
     result.innerText += "\n DPG needed: " + dpg_total;
     result.innerText += "\n Batches needed: " + batch_total;
