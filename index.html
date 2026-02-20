@@ -38,10 +38,9 @@
   <label>Current tier:</label>
   <select id="startTier" onchange="calculatePoints()">
     <option value="0" selected>HR1</option>
-    <option value="1">Premium HR1</option>
-    <option value="2">HR100</option>
-    <option value="3">G Rank</option>
-    <option value="4">Extreme</option>
+    <option value="1">HR100</option>
+    <option value="2">G Rank</option>
+    <option value="3">Extreme</option>
   </select>
 
   <label>at level</label>
@@ -52,14 +51,16 @@
   <label>Target tier:</label>
   <select id="endTier" onchange="calculatePoints()">
     <option value="0">HR1</option>
-    <option value="1">Premium HR1</option>
-    <option value="2">HR100</option>
-    <option value="3">G Rank</option>
-    <option value="4" selected>Extreme</option>
+    <option value="1">HR100</option>
+    <option value="2">G Rank</option>
+    <option value="3" selected>Extreme</option>
   </select>
 
   <label>at level</label>
   <input type="number" id="endLevel" min="1" max="100" value="100" oninput="calculatePoints()">
+  <br>
+  <label>Is Premium</label>
+  <input type="checkbox" id="isPremium" onchange="calculatePoints()">
   <br>
   <h3 id="result"></h3>
   <script src="calc.js" onload="calculatePoints()"></script>
