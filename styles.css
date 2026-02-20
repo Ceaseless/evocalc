@@ -1,0 +1,27 @@
+ * {
+     font-family: Meiryo;
+ }
+
+ .container {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+
+ }
+
+ .item {
+     flex: none;
+ }
+
+ body {
+     padding: 10px;
+ }
+
+ input,
+ select {
+     margin: 5px;
+ }
+
+ button {
+     margin-top: 10px;
+ }

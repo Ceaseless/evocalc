@@ -4,66 +4,58 @@
 <head>
   <meta charset="UTF-8">
   <title>Evo Calculator (Rain)</title>
-  <style>
-    * {
-      font-family: Meiryo;
-    }
-
-    body {
-      padding: 10px;
-    }
-
-    input,
-    select {
-      margin: 5px;
-    }
-
-    button {
-      margin-top: 10px;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
   <h2>Evo Calculator (Rain)</h2>
-  <label>BC Discount:</label>
-  <select id="bcDiscount" onchange="calculatePoints()">
-    <option value="0">None</option>
-    <option value="0.1">Bronze 10%</option>
-    <option value="0.2">Silver 20%</option>
-    <option value="0.4">Gold 40%</option>
-  </select>
-  <br>
-  <label>Current tier:</label>
-  <select id="startTier" onchange="calculatePoints()">
-    <option value="0" selected>HR1</option>
-    <option value="1">HR100</option>
-    <option value="2">G Rank</option>
-    <option value="3">Extreme</option>
-  </select>
+  <div class="container">
+    <div class="item">
+      <label>BC Discount:</label>
+      <select id="bcDiscount" onchange="calculatePoints()">
+        <option value="0">None</option>
+        <option value="0.1">Bronze 10%</option>
+        <option value="0.2">Silver 20%</option>
+        <option value="0.4">Gold 40%</option>
+      </select>
+    </div>
+    <br>
+    <div class="item">
+      <label>Current tier:</label>
+      <select id="startTier" onchange="calculatePoints()">
+        <option value="0" selected>HR1</option>
+        <option value="1">HR100</option>
+        <option value="2">G Rank</option>
+        <option value="3">Extreme</option>
+      </select>
 
-  <label>at level</label>
-  <input type="number" id="startLevel" min="1" max="100" value="1" oninput="calculatePoints()">
+      <label>at level</label>
+      <input type="number" id="startLevel" min="1" max="100" value="1" oninput="calculatePoints()">
+    </div>
+    <br>
+    <div class="item">
+      <label>Target tier:</label>
+      <select id="endTier" onchange="calculatePoints()">
+        <option value="0">HR1</option>
+        <option value="1">HR100</option>
+        <option value="2">G Rank</option>
+        <option value="3" selected>Extreme</option>
+      </select>
 
-  <br>
+      <label>at level</label>
+      <input type="number" id="endLevel" min="1" max="100" value="100" oninput="calculatePoints()">
+    </div>
+    <br>
+    <div class="item">
+      <label>Is Premium</label>
+      <input type="checkbox" id="isPremium" onchange="calculatePoints()">
+    </div>
+    <br>
 
-  <label>Target tier:</label>
-  <select id="endTier" onchange="calculatePoints()">
-    <option value="0">HR1</option>
-    <option value="1">HR100</option>
-    <option value="2">G Rank</option>
-    <option value="3" selected>Extreme</option>
-  </select>
-
-  <label>at level</label>
-  <input type="number" id="endLevel" min="1" max="100" value="100" oninput="calculatePoints()">
-  <br>
-  <label>Is Premium</label>
-  <input type="checkbox" id="isPremium" onchange="calculatePoints()">
-  <br>
-  <h3 id="result"></h3>
-  <script src="calc.js" onload="calculatePoints()"></script>
+    <h3 id="result" class="item"></h3>
+  </div>
+  <script src="scripts/calc.js" onload="calculatePoints()"></script>
 
 </body>
 
