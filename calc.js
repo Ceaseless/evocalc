@@ -61,7 +61,12 @@ function calculatePoints() {
     const startIndex = getGlobalIndex(startTier, startLevel);
     const endIndex = getGlobalIndex(endTier, endLevel)
 
-    if (endIndex <= startIndex) {
+    if (startLevel < 1 || endLevel < 1 || startLevel > 100 || endLevel > 100) {
+        displayCosts(0);
+        return;
+    }
+
+    if (endIndex < startIndex) {
         document.getElementById("result").innerText =
             "Current weapon higher than target";
         return;
