@@ -47,7 +47,7 @@ function displayCosts(totalPoints) {
     result.innerText += "\n DPG needed: " + dpg_total;
     result.innerText += "\n Batches needed: " + batch_total;
     result.innerText += "\n RdP cost: " + rdp_cost;
-    result.innerText += "\n BC cost (Discount): " + bc_cost_base + " (" + bc_cost_discount + ")";
+    result.innerText += "\n BC cost: " + bc_cost_discount;
 }
 
 function calculatePoints() {
