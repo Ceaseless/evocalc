@@ -2,6 +2,24 @@
      font-family: Meiryo;
  }
 
+ :root {
+     color-scheme: light dark;
+     --bg-color-light: #fcfcfc;
+     --bg-color-dark: #161923;
+     --font-color-light: #292524;
+     --font-color-dark: #BCBDD0;
+     --highlight-color-light: #597700;
+     --highlight-color-dark: #FFCA57;
+ }
+
+ body {
+     color: light-dark(var(--font-color-light), var(--font-color-dark));
+     background-color: light-dark(var(--bg-color-light), var(--bg-color-dark));
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
  .container {
      width: 420px;
      padding: 20px 24px;
@@ -29,28 +47,14 @@
      font-weight: 600;
  }
 
-
  .output-group .val {
      text-align: left;
      font-variant-numeric: tabular-nums;
- }
-
- :root {
-     color-scheme: light dark;
- }
-
- body {
-     padding: 10px;
-     color: light-dark(#292524, #BCBDD0);
-     background-color: light-dark(#fcfcfc, #161923);
-     display: flex;
-     align-items: center;
-     justify-content: center;
-
+     color: light-dark(var(--highlight-color-light), var(--highlight-color-dark));
  }
 
  input,
  select {
      margin: 5px;
-     color: light-dark(#597700, #FFCA57);
+     color: light-dark(var(--highlight-color-light), var(--highlight-color-dark));
  }
