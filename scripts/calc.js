@@ -20,9 +20,21 @@ const premiumPoints = [
 
 
 const dpgPointValue = 100;
-const dpgBatchSize = 999;
-const rdpPricePerBatch = 7500;
-const bcPricePerBatch = 2200;
+const dpgStackSize = 999;
+const rdpPricePerStack = 7500;
+const bcPricePerStack = 2200;
+
+const outputs = Object.fromEntries(
+    [...document.querySelectorAll('.output-group .val')]
+        .map(el => [el.dataset.key, el])
+);
+
+const bcDiscountFactorInput = document.getElementById("bcDiscount");
+const startTierInput = document.getElementById("startTier");
+const startLevelInput = document.getElementById("startLevel");
+const endTierInput = document.getElementById("endTier");
+const endLevelInput = document.getElementById("endLevel");
+const isPremiumInput = document.getElementById("isPremium");
 
 
 function getGlobalIndex(state, level) {
@@ -35,49 +47,57 @@ function getPointsAt(globalIndex, tierPoints) {
     return tierPoints[tier][level];
 }
 
-function displayCosts(totalPoints) {
-    const bcDiscountFactor = parseFloat(document.getElementById("bcDiscount").value);
-
-    const dpg_total = Math.ceil(totalPoints / dpgPointValue);
-    const batch_total = Math.ceil(dpg_total / dpgBatchSize);
-    const rdp_cost = batch_total * rdpPricePerBatch;
-    const bc_cost_base = batch_total * bcPricePerBatch;
-    const bc_cost_discount = bc_cost_base * (1 - bcDiscountFactor);
-    const result = document.getElementById("result");
-    result.innerText = "Points needed: " + totalPoints;
-    result.innerText += "\n DPG needed: " + dpg_total;
-    result.innerText += "\n Batches needed: " + batch_total;
-    result.innerText += "\n RdP cost: " + rdp_cost;
-    result.innerText += "\n BC cost: " + bc_cost_discount;
+function displayCosts(costs) {
+    for (const [key, value] of Object.entries(costs)) {
+        if (outputs[key]) {
+            outputs[key].textContent =
+                Number(value).toLocaleString();
+        }
+    }
 }
 
 function calculatePoints() {
 
-    const startTier = parseInt(document.getElementById("startTier").value);
-    const startLevel = parseInt(document.getElementById("startLevel").value);
-    const endTier = parseInt(document.getElementById("endTier").value);
-    const endLevel = parseInt(document.getElementById("endLevel").value);
-    const isPremium = document.getElementById("isPremium").checked;
+    const startTier = parseInt(startTierInput.value);
+    const startLevel = parseInt(startLevelInput.value);
+    const endTier = parseInt(endTierInput.value);
+    const endLevel = parseInt(endLevelInput.value);
+    const isPremium = isPremiumInput.checked;
 
     const startIndex = getGlobalIndex(startTier, startLevel);
     const endIndex = getGlobalIndex(endTier, endLevel)
 
-    if (startLevel < 1 || endLevel < 1 || startLevel > 100 || endLevel > 100) {
-        displayCosts(0);
+    if ((endIndex < startIndex) || startLevel < 1 || endLevel < 1 || startLevel > 100 || endLevel > 100) {
+        displayCosts({
+            points: 0,
+            dpg: 0,
+            stacks: 0,
+            rdp: 0,
+            bc: 0
+        });
         return;
     }
 
-    if (endIndex < startIndex) {
-        document.getElementById("result").innerText =
-            "Current weapon higher than target";
-        return;
-    }
     const tierPoints = isPremium ? premiumPoints : normalPoints;
     let gTotal = 0;
     for (let i = startIndex; i < endIndex; i++) {
         gTotal += getPointsAt(i, tierPoints);
     }
-    displayCosts(gTotal);
+
+    const bcDiscountFactor = parseFloat(bcDiscountFactorInput.value);
+    const dpg_total = Math.ceil(gTotal / dpgPointValue);
+    const stacks_total = Math.ceil(dpg_total / dpgStackSize);
+    const rdp_cost = stacks_total * rdpPricePerStack;
+    const bc_cost_base = stacks_total * bcPricePerStack;
+    const bc_cost_discount = bc_cost_base * (1 - bcDiscountFactor);
+
+    displayCosts({
+        points: gTotal,
+        dpg: dpg_total,
+        stacks: stacks_total,
+        rdp: rdp_cost,
+        bc: bc_cost_discount
+    });
 }
 
 

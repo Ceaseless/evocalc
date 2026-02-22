@@ -10,22 +10,23 @@
 
 <body>
 
-  
+
   <div class="container">
     <h2>Evo Calculator (Rain)</h2>
     <div class="control-group">
-      <div class="item">
-        <label>BC Discount:</label>
-        <select id="bcDiscount" onchange="calculatePoints()">
-          <option value="0">None</option>
-          <option value="0.1">Bronze 10%</option>
-          <option value="0.2">Silver 20%</option>
-          <option value="0.4">Gold 40%</option>
-        </select>
-      </div>
-      <br>
-      <div class="item">
-        <label>Current tier:</label>
+
+      <label>BC Discount:</label>
+      <select id="bcDiscount" onchange="calculatePoints()">
+        <option value="0">None</option>
+        <option value="0.1">Bronze 10%</option>
+        <option value="0.2">Silver 20%</option>
+        <option value="0.4">Gold 40%</option>
+      </select>
+
+
+
+      <label>Current tier:</label>
+      <div class="inline">
         <select id="startTier" onchange="calculatePoints()">
           <option value="0" selected>HR1</option>
           <option value="1">HR100</option>
@@ -36,9 +37,9 @@
         <label>at level</label>
         <input type="number" id="startLevel" min="1" max="100" value="1" oninput="calculatePoints()">
       </div>
-      <br>
-      <div class="item">
-        <label>Target tier:</label>
+
+      <label>Target tier:</label>
+      <div class="inline">
         <select id="endTier" onchange="calculatePoints()">
           <option value="0">HR1</option>
           <option value="1">HR100</option>
@@ -49,15 +50,29 @@
         <label>at level</label>
         <input type="number" id="endLevel" min="1" max="100" value="100" oninput="calculatePoints()">
       </div>
-      <br>
-      <div class="item">
-        <label>Is Premium</label>
+
+      <label>Is Premium</label>
+      <div class="inline">
         <input type="checkbox" id="isPremium" onchange="calculatePoints()">
       </div>
-      <br>
 
+    </div>
+    <div class="output-group" id="cost-output">
 
-      <h3 id="result" class="item"></h3>
+      <label id="pointsLabel">Points needed: </label>
+      <label id="points" class="val" data-key="points">0</label>
+
+      <label id="dpgLabel">DPG needed: </label>
+      <label id="dpg" class="val" data-key="dpg">0</label>
+
+      <label id="stacksLabel">DPG stacks needed: </label>
+      <label id="stacks" class="val" data-key="stacks">0</label>
+
+      <label id="rdpLabel">RdP cost: </label>
+      <label id="rdp" class="val" data-key="rdp">0</label>
+
+      <label id="bcLabel">BC cost: </label>
+      <label id="bc" class="val" data-key="bc">0</label>
     </div>
   </div>
   <script src="scripts/calc.js" onload="calculatePoints()"></script>
