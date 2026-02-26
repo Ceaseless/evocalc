@@ -1,4 +1,10 @@
 /*
+    Credits
+        HR1,PR1,HR100,GR point costs: http://irisayame.web.fc2.com/mhf/mhf_sinka.html
+        Layout + Z point costs: SirFist (https://mh.fist.moe/database/#DBsection20)        
+*/
+
+/*
    HR1/PR1
    HR100
    GR
@@ -19,16 +25,17 @@ const premiumPoints = [
 ];
 
 
+// Constants
 const dpgPointValue = 100;
 const dpgStackSize = 999;
 const rdpPricePerStack = 7500;
 const bcPricePerStack = 2200;
 
+// Cached references
 const outputs = Object.fromEntries(
     [...document.querySelectorAll('.output-group .val')]
         .map(el => [el.dataset.key, el])
 );
-
 const bcDiscountFactorInput = document.getElementById("bcDiscount");
 const startTierInput = document.getElementById("startTier");
 const startLevelInput = document.getElementById("startLevel");
@@ -37,8 +44,8 @@ const endLevelInput = document.getElementById("endLevel");
 const isPremiumInput = document.getElementById("isPremium");
 
 
-function getGlobalIndex(state, level) {
-    return state * 100 + level;
+function getGlobalIndex(tier, level) {
+    return tier * 100 + level;
 }
 
 function getPointsAt(globalIndex, tierPoints) {
@@ -67,6 +74,7 @@ function calculatePoints() {
     const startIndex = getGlobalIndex(startTier, startLevel);
     const endIndex = getGlobalIndex(endTier, endLevel)
 
+    // On invalid inputs just display 0
     if ((endIndex < startIndex) || startLevel < 1 || endLevel < 1 || startLevel > 100 || endLevel > 100) {
         displayCosts({
             points: 0,
@@ -99,5 +107,3 @@ function calculatePoints() {
         bc: bc_cost_discount
     });
 }
-
-
