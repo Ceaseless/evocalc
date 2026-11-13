@@ -77,7 +77,8 @@ function calculatePoints() {
     // On invalid inputs just display 0
     if ((endIndex < startIndex) || startLevel < 1 || endLevel < 1 || startLevel > 100 || endLevel > 100) {
         displayCosts({
-            points: 0,
+            gPoints: 0,
+            ggPoints: 0,
             dpg: 0,
             stacks: 0,
             rdp: 0,
@@ -88,19 +89,26 @@ function calculatePoints() {
 
     const tierPoints = isPremium ? premiumPoints : normalPoints;
     let gTotal = 0;
+    let ggTotal = 0;
     for (let i = startIndex; i < endIndex; i++) {
-        gTotal += getPointsAt(i, tierPoints);
+        const points = getPointsAt(i, tierPoints);
+        if (i < 200) {
+            gTotal += points;
+        } else {
+            ggTotal += points;
+        }
     }
 
     const bcDiscountFactor = parseFloat(bcDiscountFactorInput.value);
-    const dpg_total = Math.ceil(gTotal / dpgPointValue);
+    const dpg_total = Math.ceil((gTotal + ggTotal) / dpgPointValue);
     const stacks_total = Math.ceil(dpg_total / dpgStackSize);
     const rdp_cost = stacks_total * rdpPricePerStack;
     const bc_cost_base = stacks_total * bcPricePerStack;
     const bc_cost_discount = bc_cost_base * (1 - bcDiscountFactor);
 
     displayCosts({
-        points: gTotal,
+        gPoints: gTotal,
+        ggPoints: ggTotal,
         dpg: dpg_total,
         stacks: stacks_total,
         rdp: rdp_cost,
