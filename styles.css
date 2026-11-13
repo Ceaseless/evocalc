@@ -54,6 +54,10 @@ body {
     flex: none;
 }
 
+.checkbox-row {
+    display: contents;
+}
+
 .output-group {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -102,13 +106,20 @@ a:visited {
         grid-template-columns: 1fr;
         gap: 4px;
     }
-    
-    .control-group > label:not(.inline label) {
+
+    .control-group>label:not(.inline label) {
         margin-top: 10px;
     }
 
-    .control-group > label:first-child {
+    .control-group>label:first-child {
         margin-top: 0;
+    }
+
+    .checkbox-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
     }
 
     .output-group {
